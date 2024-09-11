@@ -1,0 +1,6 @@
+version: "1.4.1"
+description: esp-zboss library component
+url: https://github.com/espressif/esp-zboss-lib
+dependencies:
+  idf:
+    version: ">=5.0"
