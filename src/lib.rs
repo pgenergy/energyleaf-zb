@@ -1,11 +1,12 @@
 mod energyleaf_zb {
-    use std::ffi::{c_void, CString};
     use anyhow::Result;
     use esp_idf_sys::esp;
     use log::info;
+    use std::ffi::{c_void, CString};
+    #[allow(unused)]
+    pub const DEVICE_MANUFACTURER: &str = "Energyleaf"; //CString = CString::new("Energyleaf").unwrap();
 
-    pub const DEVICE_MANUFACTURER : CString = CString::new("Energyleaf").unwrap();
-
+    #[allow(unused)]
     pub fn default_coordinator_config() -> esp_idf_svc::sys::esp_zb_cfg_t {
         esp_idf_svc::sys::esp_zb_cfg_t {
             esp_zb_role: esp_idf_svc::sys::esp_zb_nwk_device_type_t_ESP_ZB_DEVICE_TYPE_COORDINATOR,
@@ -18,20 +19,22 @@ mod energyleaf_zb {
         }
     }
 
+    #[allow(unused)]
     pub fn default_enddevice_config() -> esp_idf_svc::sys::esp_zb_cfg_t {
         esp_idf_svc::sys::esp_zb_cfg_t {
             esp_zb_role: esp_idf_svc::sys::esp_zb_nwk_device_type_t_ESP_ZB_DEVICE_TYPE_ED,
             install_code_policy: false,
             nwk_cfg: esp_idf_svc::sys::esp_zb_cfg_s__bindgen_ty_1 {
                 zed_cfg: esp_idf_svc::sys::esp_zb_zed_cfg_t {
-                    ed_timeout: esp_idf_svc::sys::esp_zb_aging_timeout_t_ESP_ZB_ED_AGING_TIMEOUT_64MIN
-                        as u8,
+                    ed_timeout:
+                        esp_idf_svc::sys::esp_zb_aging_timeout_t_ESP_ZB_ED_AGING_TIMEOUT_64MIN as u8,
                     keep_alive: 3000,
                 },
             },
         }
     }
 
+    #[allow(unused)]
     pub fn default_endpoint_config() -> esp_idf_svc::sys::esp_zb_endpoint_config_t {
         esp_idf_svc::sys::esp_zb_endpoint_config_t {
             endpoint: 10,
@@ -42,8 +45,8 @@ mod energyleaf_zb {
         }
     }
 
+    #[allow(unused)]
     pub fn init(mut zb_cfg: esp_idf_svc::sys::esp_zb_cfg_t) -> Result<()> {
-
         info!("Starting the initialization of Zigbee");
 
         info!("Starting the initialization of nvs-flash");
@@ -56,7 +59,6 @@ mod energyleaf_zb {
             }
         }
 
-
         info!("Creating platform-config");
         let mut zb_platform_config = esp_idf_svc::sys::esp_zb_platform_config_t {
             radio_config: esp_idf_svc::sys::esp_zb_radio_config_t {
@@ -65,7 +67,7 @@ mod energyleaf_zb {
             },
             host_config: esp_idf_svc::sys::esp_zb_host_config_t {
                 host_connection_mode:
-                esp_idf_svc::sys::esp_zb_host_connection_mode_t_ZB_HOST_CONNECTION_MODE_NONE,
+                    esp_idf_svc::sys::esp_zb_host_connection_mode_t_ZB_HOST_CONNECTION_MODE_NONE,
                 host_uart_config: Default::default(),
             },
         };
@@ -89,6 +91,7 @@ mod energyleaf_zb {
         return Ok(());
     }
 
+    #[allow(unused)]
     pub fn run() -> Result<()> {
         info!("Starting zigbee");
         match esp! { unsafe { esp_idf_svc::sys::esp_zb_start(false)}} {
@@ -106,7 +109,11 @@ mod energyleaf_zb {
         return Ok(());
     }
 
-    pub fn add_default_clusters(cluster_list: *mut esp_idf_svc::sys::esp_zb_cluster_list_t, device_model: String) -> Result<()> {
+    #[allow(unused)]
+    pub fn add_default_clusters(
+        cluster_list: *mut esp_idf_svc::sys::esp_zb_cluster_list_t,
+        device_model: String,
+    ) -> Result<()> {
         info!("Adding default clusters to cluster-list");
         let mut basic_cfg = esp_idf_svc::sys::esp_zb_basic_cluster_cfg_t {
             zcl_version: 0x08,
@@ -161,10 +168,6 @@ mod energyleaf_zb {
                 return Err(anyhow::anyhow!("Could not create or add identify-cluster"));
             }
         }
-        return Ok(());
-    }
-
-    pub fn zb_main() -> Result<()> {
         return Ok(());
     }
 }
