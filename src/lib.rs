@@ -100,7 +100,7 @@ mod energyleaf_zb {
             }
         }
 
-        !info!("Starting zigbee main loop");
+        info!("Starting zigbee main loop");
         unsafe { esp_idf_svc::sys::esp_zb_main_loop_iteration() }
 
         return Ok(());
