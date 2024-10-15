@@ -88,7 +88,7 @@ mod energyleaf_zb {
             esp_idf_svc::sys::esp_zb_init(&mut zb_cfg as *mut esp_idf_svc::sys::esp_zb_cfg_t);
         }
 
-        return Ok(());
+        Ok(())
     }
 
     #[allow(unused)]
@@ -106,7 +106,7 @@ mod energyleaf_zb {
         info!("Starting zigbee main loop");
         unsafe { esp_idf_svc::sys::esp_zb_main_loop_iteration() }
 
-        return Ok(());
+        Ok(())
     }
 
     #[allow(unused)]
@@ -168,6 +168,7 @@ mod energyleaf_zb {
                 return Err(anyhow::anyhow!("Could not create or add identify-cluster"));
             }
         }
-        return Ok(());
+
+        Ok(())
     }
 }
