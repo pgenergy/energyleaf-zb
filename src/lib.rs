@@ -1,8 +1,8 @@
-
 use anyhow::Result;
 use esp_idf_sys::esp;
 use log::info;
 use std::ffi::{c_void, CString};
+
 #[allow(unused)]
 pub const DEVICE_MANUFACTURER: &str = "Energyleaf"; //CString = CString::new("Energyleaf").unwrap();
 
