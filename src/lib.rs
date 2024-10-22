@@ -1,4 +1,4 @@
-mod energyleaf_zb {
+pub mod energyleaf_zb {
     use anyhow::Result;
     use esp_idf_sys::esp;
     use log::info;
