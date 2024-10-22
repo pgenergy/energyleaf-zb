@@ -241,7 +241,7 @@ fn signal_to_string(signal: u32) -> String {
         esp_idf_svc::sys::esp_zb_app_signal_type_t_ESP_ZB_ZGP_SIGNAL_APPROVE_COMMISSIONING => "ZB_ZGP_SIGNAL_APPROVE_COMMISSIONING".to_string(),
         esp_idf_svc::sys::esp_zb_app_signal_type_t_ESP_ZB_SIGNAL_END => "ZB_SIGNAL_END".to_string(),
         _ => {
-            return "unknown".to_string()
+            "unknown".to_string()
         }
     }
 }
