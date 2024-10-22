@@ -110,7 +110,9 @@ pub fn run() -> Result<()> {
 }
 
 #[allow(unused)]
-pub fn add_default_clusters(
+/// # Safety
+/// Using raw pointer for cluster_list
+pub unsafe fn add_default_clusters(
     cluster_list: *mut esp_idf_svc::sys::esp_zb_cluster_list_t,
     device_model: String,
 ) -> Result<()> {
