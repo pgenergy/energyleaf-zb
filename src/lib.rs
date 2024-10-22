@@ -175,7 +175,7 @@ pub unsafe fn add_default_clusters(
 }
 
 #[allow(unused)]
-fn signal_to_string(signal: u32) -> String {
+pub fn signal_to_string(signal: u32) -> String {
     match signal {
         esp_idf_svc::sys::esp_zb_app_signal_type_t_ESP_ZB_ZDO_SIGNAL_DEFAULT_START => "ZDO_SIGNAL_DEFAULT_START".to_string(),
         esp_idf_svc::sys::esp_zb_app_signal_type_t_ESP_ZB_ZDO_SIGNAL_SKIP_STARTUP => "ZDO_SIGNAL_SKIP_STARTUP".to_string(),
