@@ -1,3 +1,5 @@
+mod cluster;
+
 use anyhow::Result;
 use esp_idf_sys::esp;
 use log::info;
