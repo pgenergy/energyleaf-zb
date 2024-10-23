@@ -5,3 +5,10 @@ enum ClusterId {
     ElectricityAnalog,  //65281
     ElectricityDigital, //65282
 }
+
+#[allow(unused)]
+pub struct ElectricitcyDigitalClusterConfig {
+    pub value_total: f64,
+    pub value_current: f64,
+    pub value_out: f64,
+}
