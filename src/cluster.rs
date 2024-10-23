@@ -49,5 +49,5 @@ pub fn create_time_cluster_attribute() -> *mut esp_idf_svc::sys::esp_zb_attribut
         panic!("Could not add time_cluster")
     }
 
-    return time_cluster;
+    time_cluster
 }
