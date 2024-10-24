@@ -1,6 +1,6 @@
 use esp_idf_sys::{esp, ESP_OK};
-use std::ffi::c_void;
 use log::info;
+use std::ffi::c_void;
 
 #[allow(unused)]
 #[repr(u16)]
@@ -20,13 +20,15 @@ pub struct ElectricitcyDigitalClusterConfig {
 #[allow(unused)]
 /// Using raw pointer for cluster_list
 pub unsafe fn add_ota_cluster(
-    cluster_list: *mut esp_idf_svc::sys::esp_zb_cluster_list_t
+    cluster_list: *mut esp_idf_svc::sys::esp_zb_cluster_list_t,
 ) -> anyhow::Result<()> {
     info!("Adding ota cluster to cluster-list");
 
     info!("Creating ota cluster");
     let ota_cluster = unsafe {
-        esp_idf_svc::sys::esp_zb_zcl_attr_list_create(esp_idf_svc::sys::esp_zb_zcl_cluster_id_t_ESP_ZB_ZCL_CLUSTER_ID_OTA_UPGRADE as u16)
+        esp_idf_svc::sys::esp_zb_zcl_attr_list_create(
+            esp_idf_svc::sys::esp_zb_zcl_cluster_id_t_ESP_ZB_ZCL_CLUSTER_ID_OTA_UPGRADE as u16,
+        )
     };
 
     let mut ota_variable = esp_idf_svc::sys::esp_zb_zcl_ota_upgrade_server_variable_t {
@@ -35,7 +37,9 @@ pub unsafe fn add_ota_cluster(
         file_count: 0,
     };
 
-    let ota_variable_ptr : *mut c_void = &mut ota_variable as *mut esp_idf_svc::sys::esp_zb_zcl_ota_upgrade_server_variable_t as *mut c_void;
+    let ota_variable_ptr: *mut c_void = &mut ota_variable
+        as *mut esp_idf_svc::sys::esp_zb_zcl_ota_upgrade_server_variable_t
+        as *mut c_void;
 
     match esp! { unsafe {
             esp_idf_svc::sys::esp_zb_ota_cluster_add_attr(
@@ -49,7 +53,9 @@ pub unsafe fn add_ota_cluster(
             info!("Variables for ota cluster added as attributes");
         }
         Err(_) => {
-            return Err(anyhow::anyhow!("Could not add variables for ota cluster as attribute"));
+            return Err(anyhow::anyhow!(
+                "Could not add variables for ota cluster as attribute"
+            ));
         }
     }
 
