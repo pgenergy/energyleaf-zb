@@ -1,3 +1,5 @@
+pub mod cluster;
+
 use anyhow::Result;
 use esp_idf_sys::esp;
 use log::info;
@@ -86,6 +88,15 @@ pub fn init(mut zb_cfg: esp_idf_svc::sys::esp_zb_cfg_t) -> Result<()> {
     info!("Calling intern initialization of zigbee");
     unsafe {
         esp_idf_svc::sys::esp_zb_init(&mut zb_cfg as *mut esp_idf_svc::sys::esp_zb_cfg_t);
+    }
+
+    match esp! { unsafe { esp_idf_svc::sys::esp_zb_set_primary_network_channel_set(8192) } } {
+        Ok(_) => {
+            info!("Successfully set primary network channel");
+        }
+        Err(_) => {
+            return Err(anyhow::anyhow!("Could not set primary network channel"));
+        }
     }
 
     Ok(())
