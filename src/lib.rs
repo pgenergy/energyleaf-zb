@@ -1,4 +1,4 @@
-mod cluster;
+pub mod cluster;
 
 use anyhow::Result;
 use esp_idf_sys::esp;
