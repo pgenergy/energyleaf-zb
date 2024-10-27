@@ -22,6 +22,8 @@ pub struct ElectricitcyDigitalClusterConfig {
 }
 
 #[allow(unused)]
+/// # Safety
+///
 /// Using raw pointer for cluster_list
 pub unsafe fn add_ota_cluster(
     cluster_list: *mut esp_idf_svc::sys::esp_zb_cluster_list_t,
