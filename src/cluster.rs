@@ -1,11 +1,11 @@
 use esp_idf_sys::{esp, ESP_OK};
 use log::info;
-use std::ffi::c_void;
 use num_enum::IntoPrimitive;
 use num_enum::TryFromPrimitive;
+use std::ffi::c_void;
 
 #[allow(unused)]
-#[derive(IntoPrimitive,TryFromPrimitive)]
+#[derive(IntoPrimitive, TryFromPrimitive)]
 #[repr(u16)]
 pub enum ClusterId {
     GasAnalog = 65280,  //0xff00
