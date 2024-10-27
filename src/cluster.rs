@@ -10,6 +10,10 @@ pub enum ClusterId {
     ElectricityDigital, //65282
 }
 
+pub enum ClusterCommandIdElectricityAnalog {
+    EvtNewRotation,
+}
+
 #[allow(unused)]
 pub struct ElectricitcyDigitalClusterConfig {
     pub value_total: f64,
