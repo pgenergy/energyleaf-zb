@@ -35,6 +35,7 @@ anyhow = "1.0.86"
 embedded-svc = "0.28.0"
 esp-idf-sys = "0.35.0"
 time = "0.3.36"
+num_enum = "0.7.3"
 
 [build-dependencies]
 embuild = "0.32.0"
