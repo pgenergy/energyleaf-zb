@@ -13,6 +13,7 @@ pub enum ClusterId {
     ElectricityDigital, //65282
 }
 
+#[repr(u16)]
 pub enum ClusterCommandIdElectricityAnalog {
     EvtNewRotation,
 }
