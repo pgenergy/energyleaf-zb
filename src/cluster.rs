@@ -14,6 +14,11 @@ pub enum ClusterId {
 }
 
 #[repr(u16)]
+pub enum ClusterCommandIdGasAnalog {
+    EvtNewRotation,
+}
+
+#[repr(u16)]
 pub enum ClusterCommandIdElectricityAnalog {
     EvtNewRotation,
 }
