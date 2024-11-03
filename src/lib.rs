@@ -167,6 +167,16 @@ pub unsafe fn add_default_clusters(
         }
     }
 
+    match esp! { unsafe { esp_idf_svc::sys::esp_zb_cluster_list_add_basic_cluster(cluster_list,basic_cluster,esp_idf_svc::sys::esp_zb_zcl_cluster_role_t_ESP_ZB_ZCL_CLUSTER_SERVER_ROLE as u8) } }
+    {
+        Ok(_) => {
+            info!("Basic-cluster was added");
+        }
+        Err(_) => {
+            return Err(anyhow::anyhow!("Could not create or add basic-cluster"));
+        }
+    }
+
     let mut identify_cfg = esp_idf_svc::sys::esp_zb_identify_cluster_cfg_t {
         identify_time: esp_idf_svc::sys::ESP_ZB_ZCL_IDENTIFY_IDENTIFY_TIME_DEFAULT_VALUE as u16,
     };
