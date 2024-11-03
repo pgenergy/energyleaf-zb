@@ -1,6 +1,6 @@
 [package]
 name = "energyleaf-zb"
-version = "0.1.2"
+version = "0.1.3"
 authors = ["Simon <simon.stahmer1@uni-oldenburg.de>"]
 edition = "2021"
 resolver = "2"
