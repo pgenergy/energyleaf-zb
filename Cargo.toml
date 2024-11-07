@@ -37,8 +37,14 @@ esp-idf-sys = "0.35.0"
 time = "0.3.36"
 num_enum = "0.7.3"
 
+[patch.crates-io]
+esp-idf-svc = { git = "https://github.com/esp-rs/esp-idf-svc" }
+esp-idf-hal = { git = "https://github.com/esp-rs/esp-idf-hal" }
+esp-idf-sys = { git = "https://github.com/esp-rs/esp-idf-sys" }
+
 [build-dependencies]
 embuild = "0.32.0"
+cc = "=1.1.30" # Necessary until a new version of `esp-idf-sys` is released
 [[package.metadata.esp-idf-sys.extra_components]]
 component_dirs = ["components"]
 bindings_header = "src/bindings.h"
