@@ -1,6 +1,6 @@
 pub mod cluster;
 
-use anyhow::Result;
+use anyhow::{anyhow, Result};
 use esp_idf_sys::esp;
 use log::info;
 use std::ffi::{c_void, CString};
@@ -192,6 +192,30 @@ pub unsafe fn add_default_clusters(
         }
     }
 
+    Ok(())
+}
+
+pub fn open_network() -> anyhow::Result<()> {
+    match unsafe { esp_idf_svc::sys::esp_zb_lock_acquire(esp_idf_svc::hal::delay::BLOCK) } {
+        true => {}
+        false => {
+            return Err(anyhow!("Could not open network"));
+        }
+    }
+
+    match esp! { unsafe { esp_idf_svc::sys::esp_zb_bdb_open_network(180) } } {
+        Ok(_) => {
+            info!("esp_zb_bdb_open_network was executed - button")
+        }
+        Err(_) => {
+            return Err(anyhow!("Could not open network"));
+        }
+    }
+
+    unsafe {
+        esp_idf_svc::sys::esp_zb_lock_release();
+    }
+    
     Ok(())
 }
 
