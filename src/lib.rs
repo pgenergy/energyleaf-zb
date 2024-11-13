@@ -195,7 +195,7 @@ pub unsafe fn add_default_clusters(
     Ok(())
 }
 
-pub fn open_network() -> anyhow::Result<()> {
+pub fn open_network(time_to_open: u8) -> anyhow::Result<()> {
     match unsafe { esp_idf_svc::sys::esp_zb_lock_acquire(esp_idf_svc::hal::delay::BLOCK) } {
         true => {
             //NOP
@@ -205,9 +205,9 @@ pub fn open_network() -> anyhow::Result<()> {
         }
     }
 
-    match esp! { unsafe { esp_idf_svc::sys::esp_zb_bdb_open_network(180) } } {
+    match esp! { unsafe { esp_idf_svc::sys::esp_zb_bdb_open_network(time_to_open) } } {
         Ok(_) => {
-            info!("esp_zb_bdb_open_network was executed - button")
+            info!("Network opened for {}", time_to_open)
         }
         Err(_) => {
             return Err(anyhow!("Could not open network"));
