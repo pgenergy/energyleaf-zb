@@ -197,7 +197,9 @@ pub unsafe fn add_default_clusters(
 
 pub fn open_network() -> anyhow::Result<()> {
     match unsafe { esp_idf_svc::sys::esp_zb_lock_acquire(esp_idf_svc::hal::delay::BLOCK) } {
-        true => {/**NOP**/}
+        true => {
+            //NOP
+        }
         false => {
             return Err(anyhow!("Could not open network"));
         }
@@ -215,7 +217,7 @@ pub fn open_network() -> anyhow::Result<()> {
     unsafe {
         esp_idf_svc::sys::esp_zb_lock_release();
     }
-    
+
     Ok(())
 }
 
