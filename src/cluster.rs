@@ -23,6 +23,11 @@ pub enum ClusterCommandIdElectricityAnalog {
     EvtNewRotation,
 }
 
+#[repr(u16)]
+pub enum ClusterCommandPayloadSpecific {
+    EvtNewValue,
+}
+
 #[allow(unused)]
 pub struct ElectricitcyDigitalClusterConfig {
     pub value_total: f64,
