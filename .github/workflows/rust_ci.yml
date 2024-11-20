@@ -19,7 +19,7 @@ jobs:
       matrix:
         action:
           - command: build
-            args: --release
+            args: --all
           - command: fmt
             args: --all -- --check --color always
           - command: clippy

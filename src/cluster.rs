@@ -145,6 +145,7 @@ pub fn create_gas_analog_cluster() -> anyhow::Result<*mut esp_idf_svc::sys::esp_
     Ok(analog_gas_cluster)
 }
 
+#[allow(clippy::not_unsafe_ptr_arg_deref)]
 pub fn set_and_report_attribute_value(
     cluster: u16,
     attribute: u16,
