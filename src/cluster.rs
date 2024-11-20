@@ -1,6 +1,6 @@
 use anyhow::anyhow;
 use esp_idf_sys::{esp, ESP_OK};
-use log::info;
+use log::{debug, info};
 use num_enum::IntoPrimitive;
 use num_enum::TryFromPrimitive;
 use std::ffi::c_void;
@@ -40,7 +40,7 @@ pub fn create_electricity_digital_cluster(
         &tmp_value as *const f64 as *mut c_void,
     ) } } {
         Ok(_) => {
-            info!("Attribute ReadingIn added to digital electricity cluster")
+            debug!("Attribute ReadingIn added to digital electricity cluster")
         }
         Err(_) => Err(anyhow!(
             "Could not add attribute ReadingIn added to digital electricity cluster"
@@ -56,7 +56,7 @@ pub fn create_electricity_digital_cluster(
         &tmp_value as *const f64 as *mut c_void,
     ) } } {
         Ok(_) => {
-            info!("Attribute ReadingOut added to digital electricity cluster")
+            debug!("Attribute ReadingOut added to digital electricity cluster")
         }
         Err(_) => Err(anyhow!(
             "Could not add attribute ReadingOut added to digital electricity cluster"
@@ -72,7 +72,7 @@ pub fn create_electricity_digital_cluster(
         &tmp_value as *const f64 as *mut c_void,
     ) } } {
         Ok(_) => {
-            info!("Attribute PowerCurrent added to digital electricity cluster")
+            debug!("Attribute PowerCurrent added to digital electricity cluster")
         }
         Err(_) => Err(anyhow!(
             "Could not add attribute PowerCurrent added to digital electricity cluster"
@@ -104,7 +104,7 @@ pub fn create_electricity_analog_cluster(
         std::ptr::null_mut(),
     ) } } {
         Ok(_) => {
-            info!("Attribute Rotation added to analog electricity cluster")
+            debug!("Attribute Rotation added to analog electricity cluster")
         }
         Err(_) => Err(anyhow!(
             "Could not add Rotation ReadingIn added to analog electricity cluster"
@@ -135,7 +135,7 @@ pub fn create_gas_analog_cluster() -> anyhow::Result<*mut esp_idf_svc::sys::esp_
         std::ptr::null_mut(),
     ) } } {
         Ok(_) => {
-            info!("Attribute Rotation added to analog gas cluster")
+            debug!("Attribute Rotation added to analog gas cluster")
         }
         Err(_) => Err(anyhow!(
             "Could not add Rotation ReadingIn added to analog gas cluster"
@@ -145,6 +145,7 @@ pub fn create_gas_analog_cluster() -> anyhow::Result<*mut esp_idf_svc::sys::esp_
     Ok(analog_gas_cluster)
 }
 
+#[allow(clippy::not_unsafe_ptr_arg_deref)]
 pub fn set_and_report_attribute_value(
     cluster: u16,
     attribute: u16,
@@ -161,7 +162,7 @@ pub fn set_and_report_attribute_value(
         check,
     ) } } {
         Ok(_) => {
-            info!("Set attribute {} for {}", attribute, cluster)
+            debug!("Set attribute {} for {}", attribute, cluster)
         }
         Err(_) => Err(anyhow!(
             "Could not set attribute {} for {}",
@@ -185,7 +186,7 @@ pub fn set_and_report_attribute_value(
 
     match esp! { unsafe { esp_idf_svc::sys::esp_zb_zcl_report_attr_cmd_req(&mut report) } } {
         Ok(_) => {
-            info!(
+            debug!(
                 "Set and Reported value (Cluster: {}; Attribute: {})",
                 cluster, attribute
             );
